@@ -9,11 +9,13 @@ import com.example.repositories.*;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -31,9 +33,9 @@ public class CartServiceImpl implements CartService {
     private CartDetailsRepository cartDetailRepository;
 
     @Override
-    public String addProductToCart(CartRequestDto request) {
-        User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    public String addProductToCart(CartRequestDto request, String username) {
+    	 User user = userRepository.findByUsername(username)
+    		        .orElseThrow(() -> new RuntimeException("User not found"));
 
         Productmaster product = productRepository.findById(request.getProductId())
                 .orElseThrow(() -> new RuntimeException("Product not found"));
@@ -135,5 +137,16 @@ public class CartServiceImpl implements CartService {
         if (remaining == 0) {
         	cartRepository.deleteById(cartId);
         }
+    }
+    
+    public int getUserIdByUsername(String username) {
+        // Use UserRepository to fetch user ID from username
+    	Optional<User> optionalUser =  userRepository.findByUsername(username);
+    	if (!optionalUser.isPresent()) {
+    	    throw new UsernameNotFoundException("User not found with email: " + username);
+    	}
+    	User user = optionalUser.get();
+        
+        return user.getUserId(); // assuming this method exists
     }
 }

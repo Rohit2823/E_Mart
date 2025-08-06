@@ -9,8 +9,9 @@ import com.example.dtos.CartViewDto;
 
 public interface CartService {
 
-	String addProductToCart(CartRequestDto cartRequestDto);
+	String addProductToCart(CartRequestDto request, String username);
 	List<CartViewDto> getCartDetailsByUserId(int userId);
 	void updateCartQuantities(List<CartUpdateRequestDto> updates);
 	void deleteCartItem(int cartDetailId);
+	int getUserIdByUsername(String username);
 }

@@ -4,14 +4,14 @@ import com.example.model.PurchaseMode;
 
 public class CartRequestDto {
 
-	private int userId;
+	//private int userId;
     private int productId;
-    public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+//    public int getUserId() {
+//		return userId;
+//	}
+//	public void setUserId(int userId) {
+//		this.userId = userId;
+//	}
 	public int getProductId() {
 		return productId;
 	}
