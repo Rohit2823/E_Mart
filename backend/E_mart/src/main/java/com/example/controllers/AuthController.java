@@ -41,7 +41,7 @@ public class AuthController {
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 
         final String token = jwtUtils.generateToken((UserDetails) auth.getPrincipal());
-        System.out.println("Token is generated" + token);
+        System.out.println("Token is generated : " + token);
         AuthResponse res = new AuthResponse();
         res.setToken(token);
         res.setUsername(request.getUsername());

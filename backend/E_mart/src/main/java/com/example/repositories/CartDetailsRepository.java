@@ -16,4 +16,5 @@ public interface CartDetailsRepository extends JpaRepository<CartDetails, Intege
     List<CartDetails> findByCart_User_UserId(int userId);
     
     long countByCart_CartId(int cartId);
+    List<CartDetails> findByCart(CartMaster cart);
 }
